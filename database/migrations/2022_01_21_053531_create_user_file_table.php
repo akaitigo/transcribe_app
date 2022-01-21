@@ -15,6 +15,10 @@ class CreateUserFileTable extends Migration
     {
         Schema::create('user_file', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->comment('ユーザid');
+            $table->foreign('user_id')->references('id')->on('userss');
+            $table->unsignedBigInteger('file_id')->comment('文字起こし元のファイルid');
+            $table->foreign('file_id')->references('id')->on('files');
             $table->timestamps();
         });
     }

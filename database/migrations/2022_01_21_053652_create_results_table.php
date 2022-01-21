@@ -15,7 +15,9 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('file_id')->comment('文字起こし元のファイルid');
+            $table->foreign('file_id')->references('id')->on('files');
+            $table->longText('content')->nullable()->comment('文字起こし内容');
         });
     }
 

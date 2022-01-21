@@ -15,7 +15,7 @@ class CreateWordsTable extends Migration
     {
         Schema::create('words', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name',255)->comment('単語名');
         });
     }
 
