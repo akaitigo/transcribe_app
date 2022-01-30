@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Google\Cloud\Storage\StorageClient;
 // use Google\Cloud\Speech\SpeechClient;
 use Google\Cloud\Speech\V1p1beta1\SpeechClient;
 use Google\Cloud\Speech\V1p1beta1\RecognitionConfig\AudioEncoding;
@@ -28,9 +28,38 @@ class UploadController extends Controller
 
         echo "upload success";
 
-        //ここから非同期音声認識
+        // プロジェクトIDを入力
+        $projectId = 'stellar-river-339009';
+        // 認証鍵までのディレクトリを入力
+        $auth_key = config_path('google.json');
+        // バケットの名前を入力
+        $bucket_name = 'firstrecg';
+        // ファイルのディレクトリパスを入力
+        $path = $request->file('file')->path();
+        
+        
+        $storage = new StorageClient([
+        'projectId' => $projectId,
+        'keyFile' => json_decode(file_get_contents($auth_key, TRUE), true)
+        ]);
+        
+        $bucket = $storage->bucket($bucket_name);
+        
+        // $options = [
+        // 'name' => $path
+        // ];
+        
+        $object = $bucket->upload(
+        fopen("{$path}", 'r'),
+        // $options
+        );
+        
+        echo "[{$path}]のアップロード完了";
+
+
+        // ここから非同期音声認識
         $speechClient =  new SpeechClient([
-                'keyFile' => json_decode(file_get_contents(config_path('google.json')), true),
+                'keyFile' => json_decode(file_get_contents(config_path('google.json')), true), //googleのapiの認証情報のファイルをここで指定
                 'languageCode' => 'ja-JP'
             ]);
         try {
@@ -43,7 +72,7 @@ class UploadController extends Controller
             $config->setSampleRateHertz($sampleRateHertz);
             $config->setLanguageCode($languageCode);
             $config->setModel($model);
-            $uri = 'gs://firstrecg/warui.flac';
+            $uri = 'gs://firstrecg/phpb8et8X'; 
             $audio = new RecognitionAudio();
             $audio->setUri($uri);
             $operationResponse = $speechClient->longRunningRecognize($config, $audio);
