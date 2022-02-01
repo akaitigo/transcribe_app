@@ -4,45 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Google\Cloud\Storage\StorageClient;
-use Google\Cloud\PubSub\PubSubClient;
-// use Google\Cloud\Speech\SpeechClient;
-use Google\Cloud\Speech\V1p1beta1\SpeechClient;
-use Google\Cloud\Speech\V1p1beta1\RecognitionConfig\AudioEncoding;
-use Google\Cloud\Speech\V1p1beta1\RecognitionConfig;
-use Google\Cloud\Speech\V1p1beta1\RecognitionAudio;
+
 
 class UploadController extends Controller
 {
 
     public function index(){
-        // $projectId = 'stellar-river-339009';
-        // // 認証鍵までのディレクトリを入力
-        // $auth_key = config_path('google.json');
-        // $pubSub = new PubSubClient([
-        //     'projectId' => $projectId,
-        //     'keyFile' => json_decode(file_get_contents($auth_key, TRUE), true)
-        //     ]);
-        // // Get an instance of a previously created topic.
-        // // $topic = $pubSub->topic('Mytopic');
-
-        // // Publish a message to the topic.
-        // // $topic->publish([
-        // //     'data' => 'My new message.',
-        // //     'attributes' => [
-        // //         'location' => 'Detroit'
-        // //     ]
-        // // ]);
-
-        // // Get an instance of a previously created subscription.
-        // $subscription = $pubSub->subscription('Mytopic-sub');
-
-        // // Pull all available messages.
-        // $messages = $subscription->pull();
-
-        // foreach ($messages as $message) {
-        //     echo $message->data() . "\n";
-        //     echo $message->attribute('location');
-        // }
         return view('uploadTest');
     }
     public function store(Request $request){
@@ -55,7 +22,7 @@ class UploadController extends Controller
         
         // $request->file('file')->store('files');
 
-        // echo "upload success";
+        echo "upload success";
 
         // // プロジェクトIDを入力
         $projectId = 'stellar-river-339009';
@@ -74,126 +41,14 @@ class UploadController extends Controller
         
         $bucket = $storage->bucket($bucket_name);
         
-        // $options = [
-        // 'name' => $path
-        // ];
         
-        $object = $bucket->upload(
+        $bucket->upload(
         fopen("{$path}", 'r'),
         // $options
         );
         
         echo "[{$path}]のアップロード完了";
-        // $pubSub = new PubSubClient(([
-        //     'projectId' => $projectId,
-        //     'keyFile' => json_decode(file_get_contents($auth_key, TRUE), true)
-        // ]));
-        // $pubSub = new PubSubClient();
-        // $topic = $pubSub->topic('Mytopic');
-        // // $notification = $bucket->createNotification($topic);
-        // $notification = $bucket->createNotification('Mytopic', [
-        //     'event_types' => [
-        //         'OBJECT_CREATE'
-        //         // 'OBJECT_METADATA_UPDATE'
-        //     ]
-        // ]);
-        // dd($topic);
-        // dd($pubSub);
-        // $subscription = $pubSub->subscription('Mytopic-sub');
-
-        // Pull all available messages.
-        // $messages = $subscription->pull();
-
-        // foreach ($messages as $message) {
-        //     echo $message->data() . "\n";
-        //     echo $message->attribute('location');
-        // }
-
-
-        // ここから非同期音声認識
-        // $speechClient =  new SpeechClient([
-        //         'keyFile' => json_decode(file_get_contents(config_path('google.json')), true), //googleのapiの認証情報のファイルをここで指定
-        //         'languageCode' => 'ja-JP'
-        //     ]);
-        // try {
-        //     $encoding = AudioEncoding::FLAC;
-        //     $sampleRateHertz = 44100;
-        //     $languageCode = 'ja-JP';
-        //     $model = 'phone_call'; //'default'がデフォルト、'phone_call'が通話モデル
-        //     $config = new RecognitionConfig();
-        //     $config->setEncoding($encoding);
-        //     $config->setSampleRateHertz($sampleRateHertz);
-        //     $config->setLanguageCode($languageCode);
-        //     $config->setModel($model);
-        //     $uri = 'gs://firstrecg/phpb8et8X'; 
-        //     $audio = new RecognitionAudio();
-        //     $audio->setUri($uri);
-        //     $operationResponse = $speechClient->longRunningRecognize($config, $audio);
-        //     $operationResponse->pollUntilComplete();
-        //     if ($operationResponse->operationSucceeded()) {
-        //         $result = $operationResponse->getResult();
-        //         // doSomethingWith($result)
-        //         dd($result);
-        //     } else {
-        //         $error = $operationResponse->getError();
-        //         dd($error);
-        //         // handleError($error)
-        //     }
-
-    // // Alternatively:
-
-    // start the operation, keep the operation name, and resume later
-    // $operationResponse = $speechClient->longRunningRecognize($config, $audio);
-    // $operationName = $operationResponse->getName();
-    // // ... do other work
-    // $newOperationResponse = $speechClient->resumeOperation($operationName, 'longRunningRecognize');
-    // while (!$newOperationResponse->isDone()) {
-    //     // ... do other work
-    //     $newOperationResponse->reload();
-    // }
-    // if ($newOperationResponse->operationSucceeded()) {
-    //   $result = $newOperationResponse->getResult();
-    //   // doSomethingWith($result)
-    // } else {
-    //   $error = $newOperationResponse->getError();
-    //   // handleError($error)
-    // }
-// } finally {
-//     $speechClient->close();
-// }
-
-
-
-
         
-
-        //ここから同期処理での音声認識、本番では非同期なので使わない
-        //
-        // $speech = new SpeechClient([
-        //     'keyFile' => json_decode(file_get_contents(config_path('google.json')), true),
-        //     'languageCode' => 'ja-JP'
-        // ]);
-
-        // $results = $speech->recognize(
-        //     fopen($request->file('file')->path(), 'r'), [
-        //         'languageCode' => 'ja-JP',
-        //         'encoding' => 'FLAC',
-        //         'sampleRateHertz' => 44100,
-        //         'speechContexts' => [
-        //             [
-        //                 'phrases' => [
-        //                     'The Google Cloud Platform',
-        //                     'Speech API'
-        //             ]
-        //         ]
-        //     ]
-        // ]);
-
-        // // dd($results);
-        
-        // foreach ($results as $result) {
-        //     echo $result->topAlternative()['transcript'] . PHP_EOL;
-        // }
 
         
     }
