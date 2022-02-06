@@ -18,6 +18,7 @@ class GoogleController extends Controller
         //function-5では何回でも同じ結果を得られる。開発用
         $request = new \GuzzleHttp\Psr7\Request('GET', 'https://asia-northeast2-stellar-river-339009.cloudfunctions.net/function-5');
 
+
         $promise = $client->sendAsync($request)->then(function ($response) {
             $result = $response->getBody();
             echo($result);
