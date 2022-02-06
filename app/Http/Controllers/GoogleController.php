@@ -3,11 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Google\Cloud\Storage\StorageClient;
-use Google\Cloud\PubSub\PubSubClient;
-use Google\CloudFunctions\FunctionsFramework;
-use Psr\Http\Message\ServerRequestInterface;
-use Google\Cloud\Functions\V1\CloudFunctionsServiceClient;
 use GuzzleHttp\Client;
 
 class GoogleController extends Controller
