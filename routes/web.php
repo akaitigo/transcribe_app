@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('upload',UploadController::class);
-// Route::get('/upload', [UploadController::class, 'store']);
+Route::get('/google', 'App\Http\Controllers\GoogleController@index');
