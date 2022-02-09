@@ -26,6 +26,16 @@ class GoogleController extends Controller
         });
 
         $promise->wait();
+
+        $request2 = new \GuzzleHttp\Psr7\Request('GET', 'https://asia-northeast2-stellar-river-339009.cloudfunctions.net/getKeyfrase');
+
+        $promise2 = $client->sendAsync($request2)->then(function ($response) {
+            $result = $response->getBody();
+            echo($result);
+
+        });
+
+        $promise2->wait();
         
     }
 
