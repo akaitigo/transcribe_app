@@ -13,8 +13,17 @@ use App\Http\Controllers\UploadController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::resource('upload',UploadController::class);
 Route::get('/google', 'App\Http\Controllers\GoogleController@index');
+
+Route::get('/', function () {return view('head');});
+Route::get('/index', function () {return view('index');});
+Route::get('/login', function () {return view('login');});
+Route::get('/result', function () {return view('result');});
+Route::get('/submit', function () {return view('submit');});
+Route::get('/upload2', function () {return view('upload');});
+
+
