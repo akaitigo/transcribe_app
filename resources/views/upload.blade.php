@@ -26,8 +26,9 @@
     <div id="field">
         <div id="main" class="container">
             <h1>動画ファイルをアップロード</h1>
-            <form action="" method="post">
-                <input name="data" type="file" class="form-control"><br>
+            <form action="/upload" method="post"enctype="multipart/form-data">
+                @csrf
+                <input name="file" type="file" id="file" accept=".mp4" class="form-control"><br>
                 <input type="submit" value="送信" class="btn btn-primary">
             </form>
         </div>
