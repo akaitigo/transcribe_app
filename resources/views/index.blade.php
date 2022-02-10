@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('Foundation.css')}}">
+    <script src="{{asset('Foundation.js')}}" ></script>
+    <style>
+        div.item {
+            display: inline-block;
+            width: 250px;
+            height: 140px;
+            position: relative;
+            background-size: cover;
+            margin: 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+            div.item span {
+                background-color: #FFFFFF98;
+                position: absolute;
+                padding: 5px;
+            }
+
+            div.item span.words {
+                top: 0;
+                left: 0;
+            }
+
+            div.item span.date {
+                bottom: 0;
+                right: 0;
+            }
+    </style>
+    <title>index - 文字起こし</title>
+</head>
+<body>
+    <header>
+        <div class="row">
+            <div class="col-auto">
+                <a href="index">
+                    <div class="headerBut">
+                        サービス名
+                    </div>
+                </a>
+            </div>
+            <div class="col-auto">
+                <div class="headerBut" onclick="shMenu()">
+                    メニュー
+                    
+                    <div id="menu" style="display: none;">
+                        <a href="index">一覧</a>
+                        <div class="hor_divider"></div>
+                        <a href="submit">投稿</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+            <div class="col-auto">
+                <div id="loginName">
+                    <a href="login">
+                    ログイン名
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="field">
+        <div id="main" class="container">
+            <div id="items">
+                <a href="result">
+                    <div class="item" style="background-image: url(imgs/test0.jpg);">
+                        <span class="words">柵, 木材</span>
+                        <span class="date">2022/01/24 14:27</span>
+                    </div>
+                </a>
+
+                <a href="">
+                    <div class="item" style="background-image: url(imgs/test1.jfif);">
+                        <span class="words">かわいい, ちっちゃい</span>
+                        <span class="date">2022/01/27 10:07</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- #region Bootstrap -->
+    <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <!-- #endregion -->
+</body>
+</html>

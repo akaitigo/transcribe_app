@@ -8,38 +8,18 @@
     <link rel="stylesheet" href="{{asset('Foundation.css')}}">
     <script src="{{asset('Foundation.js')}}" ></script>
     <style>
-        video {
-            width: 80%;
+        form {
+            text-align: right;
         }
 
-        div#results, div#words {
-            display: inline-block;
-            text-align: left;
+        /* form input[type=file] {
+            width: 100%;
+            margin-bottom: 50px;
             border: 1px solid black;
             background-color: white;
-        }
-
-        div#results {
-            width: 80%;
-            height: 200px;
-            overflow-y: scroll;
-            padding: 5px;
-        }
-
-        div#words {
-            width: calc(100% - 20px);
-            height: 100px;
-            overflow-y: scroll;
-            padding: 10px;
-        }
-
-            div#words span {
-                border-radius: 60%;
-                background-color: lightgray;
-                padding: 5px 10px;
-            }
+        } */
     </style>
-    <title>result - 文字起こし</title>
+    <title>submit - 文字起こし</title>
 </head>
 <body>
     <header>
@@ -66,7 +46,7 @@
             <div class="col-auto">
                 <div id="loginName">
                     <a href="login">
-                    ログイン名
+                        ログイン名
                     </a>
                 </div>
             </div>
@@ -75,20 +55,14 @@
 
     <div id="field">
         <div id="main" class="container">
-            <video src="videos/test.mp4" controls></video>
-            <hr>
-            <h1>文字起こし結果</h1>
-            <div id="results">
-                起こした内容
-            </div>
-
-            <h2>キーワード</h2>
-            <div id="words">
-                <span>棚</span>
-                <span>木材</span>
-            </div>
+            <h1>動画ファイルをアップロード</h1>
+            <form action="" method="post">
+                <input name="data" type="file" class="form-control"><br>
+                <input type="submit" value="送信" class="btn btn-primary">
+            </form>
         </div>
     </div>
+
     <!-- #region Bootstrap -->
     <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- #endregion -->
