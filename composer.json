@@ -16,7 +16,8 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "pbmedia/laravel-ffmpeg": "^7.7"
+        "pbmedia/laravel-ffmpeg": "^8.0.0",
+        "illuminate/contracts":"v9.0.0-beta.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
