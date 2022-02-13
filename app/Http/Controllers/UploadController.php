@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
-use FFMpeg\FFMpeg;
+use Facade\FlareClient\Flare;
+use FFMpeg\Format\Audio\Flac;
+use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use Illuminate\Http\Request;
 use Google\Cloud\Storage\StorageClient;
 use Illuminate\Support\Facades\Storage;
@@ -63,17 +65,18 @@ class UploadController extends Controller
             'file' => 'required|mimetypes:video/mp4'
         ]);
         $file = $request->file('file');
-        $path = $request->file('file')->path();
         $filename = $request->file('file')->getClientOriginalName();
-        $request->file('file')->store('video');
-        $request->file('file')->store('flac');
+        $request->file('file')->storeAs('videos',$filename);
         File::create([
             'name' => $filename,
-            'path' => $path,
-        ]);
-        $newname = str_replace('.mp4','',$filename);
-        FFMpeg::fromDisk('flac')->open($path)->export()->toDisk()->inFomat(new \FFMpeg\Format\Audio\Flac)->save($newname+'.flac');
+            'path' => $filename,
 
+        ]);
+        $newname = str_replace('.mp4','',$filename).'.flac';
+        // dd(FFMpeg::fromDisk('videos')->open($filename),$file);
+
+        FFMpeg::fromDisk('videos')->open($filename)->export()->toDisk('flac')->inFormat(new \FFMpeg\Format\Audio\Flac)->save($newname);
+        dd(Storage::disk('flac')->get($newname));
         // // プロジェクトIDを入力
         $projectId = 'stellar-river-339009';
         // 認証鍵までのディレクトリを入力
