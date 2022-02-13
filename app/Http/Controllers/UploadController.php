@@ -67,16 +67,17 @@ class UploadController extends Controller
         $file = $request->file('file');
         $filename = $request->file('file')->getClientOriginalName();
         $request->file('file')->storeAs('videos',$filename);
+        $newname = str_replace('.mp4','',$filename);
         File::create([
-            'name' => $filename,
-            'path' => $filename,
-
+            'name' => $newname,
+            'path' => $newname,
         ]);
-        $newname = str_replace('.mp4','',$filename).'.flac';
+        $id = File::where('name',$newname)->get();
+        $newname = '['.$id.']'.$newname.'.flac';
         // dd(FFMpeg::fromDisk('videos')->open($filename),$file);
-
         FFMpeg::fromDisk('videos')->open($filename)->export()->toDisk('flac')->inFormat(new \FFMpeg\Format\Audio\Flac)->save($newname);
-        dd(Storage::disk('flac')->get($newname));
+        // dd(Storage::disk('flac')->get($newname));
+        $file =Storage::disk('flac')->get($newname);
         // // プロジェクトIDを入力
         $projectId = 'stellar-river-339009';
         // 認証鍵までのディレクトリを入力
@@ -84,8 +85,8 @@ class UploadController extends Controller
         // バケットの名前を入力
         $bucket_name = 'firstrecg';
         // ファイルのディレクトリパスを入力
-        $path = $request->file('file')->path();
-
+        // $path = $request->file('file')->path();
+        $path = $file;
 
         $storage = new StorageClient([
         'projectId' => $projectId,
