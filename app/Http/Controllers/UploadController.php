@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\Result;
 use Facade\FlareClient\Flare;
 use FFMpeg\Format\Audio\Flac;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
@@ -72,7 +73,9 @@ class UploadController extends Controller
             'name' => $newname,
             'path' => $newname,
         ]);
-        $id = File::where('name',$newname)->get();
+        $id = File::where('name',$newname)->latest('created_at')->first()->id;
+        Result::create(['file_id' => $id]);
+        dd(Result::all());
         $newname = '['.$id.']'.$newname.'.flac';
         // dd(FFMpeg::fromDisk('videos')->open($filename),$file);
         FFMpeg::fromDisk('videos')->open($filename)->export()->toDisk('flac')->inFormat(new \FFMpeg\Format\Audio\Flac)->save($newname);
