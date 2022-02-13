@@ -13,6 +13,9 @@ class File extends Model
         'name',
         'path',
     ];
+    public function Result(){
+        return $this->hasOne('App\Result');
+    }
     // protected $guarded = [
     //     'id',
     //     'created_at',
