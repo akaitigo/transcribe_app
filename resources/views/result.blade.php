@@ -9,7 +9,7 @@
     <script src="{{asset('Foundation.js')}}" ></script>
     <style>
         video {
-            width: 80%;
+            width: 50%;
         }
 
         div#results, div#words {

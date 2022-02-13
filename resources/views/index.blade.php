@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="{{asset('Foundation.css')}}">
     <script src="{{asset('Foundation.js')}}" ></script>
     <style>
+        div#items a {
+            font-size: 0;
+        }
+
         div.item {
             display: inline-block;
             width: 250px;
@@ -17,6 +21,7 @@
             margin: 10px;
             text-decoration: none;
             color: black;
+            font-size: medium;
         }
 
             div.item span {
