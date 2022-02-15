@@ -10,32 +10,39 @@ class GoogleController extends Controller
     public function index () 
     {
 
-        $client = new Client();
+        
+        function getScript($id){
+            $client = new Client();
+            $request = new \GuzzleHttp\Psr7\Request('GET', 'https://asia-northeast2-stellar-river-339009.cloudfunctions.net/function-5');
+            $promise = $client->sendAsync($request)->then(function ($response) {
+                $result = $response->getBody();
+                $s = mb_convert_encoding($result, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');//json形式にエンコード
+                
+                $s = json_decode($s,true); //連想配列で読みこむ。jsonのままでいい場合はこの行を削除すればよい。
 
-        //function-4では一回取得した文字起こし結果は次回以降取得できない。本番環境用。
-        // $request = new \GuzzleHttp\Psr7\Request('GET', 'https://asia-northeast2-stellar-river-339009.cloudfunctions.net/function-4');
+                print_r($s); // この行をテーブルに保存する処理に書き換える
+            });
+            $promise->wait();
+        }
 
-        //function-5では何回でも同じ結果を得られる。開発用
-        $request = new \GuzzleHttp\Psr7\Request('GET', 'https://asia-northeast2-stellar-river-339009.cloudfunctions.net/function-5');
+        function getKeyfrase($id){
+            $client = new Client();
+            $request = new \GuzzleHttp\Psr7\Request('GET', 'https://asia-northeast2-stellar-river-339009.cloudfunctions.net/getKeyfrase');
+            $promise = $client->sendAsync($request)->then(function ($response) {
+                $result = $response->getBody();
+                $s = mb_convert_encoding($result, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');//json形式にエンコード
+                
+                $s = json_decode($s,true); //連想配列で読みこむ。jsonのままでいい場合はこの行を削除すればよい。
 
+                print_r($s); //この行をテーブルに保存する処理に書き換える
+            });
+            $promise->wait();
+        }
 
-        $promise = $client->sendAsync($request)->then(function ($response) {
-            $result = $response->getBody();
-            echo($result);
-
-        });
-
-        $promise->wait();
-
-        $request2 = new \GuzzleHttp\Psr7\Request('GET', 'https://asia-northeast2-stellar-river-339009.cloudfunctions.net/getKeyfrase');
-
-        $promise2 = $client->sendAsync($request2)->then(function ($response) {
-            $result = $response->getBody();
-            echo($result);
-
-        });
-
-        $promise2->wait();
+        //関数の実行
+        $id = 1; //idから該当のファイルを取得する機能は未実装。とり急ぎ形だけ記述
+        getScript($id);
+        getKeyfrase($id);
         
     }
 
