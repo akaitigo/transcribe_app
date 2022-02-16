@@ -14,6 +14,10 @@
 
         div.item {
             display: inline-block;
+        }
+
+        div.item-img {
+            display: inline-block;
             width: 250px;
             height: 140px;
             position: relative;
@@ -24,20 +28,25 @@
             font-size: medium;
         }
 
-            div.item span {
+            div.item-img span {
                 background-color: #FFFFFF98;
                 position: absolute;
                 padding: 5px;
+                text-align: left;
             }
 
-            div.item span.words {
+            div.item-img span.words {
                 top: 0;
                 left: 0;
             }
 
-            div.item span.date {
+            span.date {
                 bottom: 0;
                 right: 0;
+                font-size: medium;
+                display: block;
+                text-decoration: none;
+                color: black;
             }
     </style>
     <title>index - 文字起こし</title>
@@ -49,15 +58,19 @@
         <div id="main" class="container">
             <div id="items">
                 <a href="result">
-                    <div class="item" style="background-image: url(imgs/test0.jpg);">
-                        <span class="words">柵, 木材</span>
+                    <div class="item">
+                        <div class="item-img" style="background-image: url(imgs/test0.jpg);">
+                            <span class="words">柵, 木材, ねじ止め</span>
+                        </div>
                         <span class="date">2022/01/24 14:27</span>
                     </div>
                 </a>
 
                 <a href="">
-                    <div class="item" style="background-image: url(imgs/test1.jfif);">
-                        <span class="words">かわいい, ちっちゃい</span>
+                    <div class="item">
+                        <div class="item-img" style="background-image: url(imgs/test1.jfif);">
+                            <span class="words">かわいい, ちっちゃい, もふもふ</span>    
+                        </div>
                         <span class="date">2022/01/27 10:07</span>
                     </div>
                 </a>
