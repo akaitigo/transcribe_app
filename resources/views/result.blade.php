@@ -9,7 +9,7 @@
     <script src="{{asset('Foundation.js')}}" ></script>
     <style>
         video {
-            width: 50%;
+            width: 100%;
         }
 
         div#results, div#words {
@@ -20,8 +20,8 @@
         }
 
         div#results {
-            width: 80%;
-            height: 200px;
+            width: 90%;
+            height: 300px;
             overflow-y: scroll;
             padding: 5px;
         }
@@ -45,13 +45,19 @@
     @include('head')
     <div id="field">
         <div id="main" class="container">
-            <video src="videos/test.mp4" controls></video>
-            <hr>
-            <h1>文字起こし結果</h1>
-            <div id="results">
-                起こした内容
+            <div class="row">
+                <div class="col-5">
+                    <video src="videos/test.mp4" controls></video>
+                    <span>2022/01/24 14:27</span>
+                </div>
+                <div class="col-7">
+                    <h1>文字起こし結果</h1>
+                    <div id="results">
+                        起こした内容
+                    </div>
+                </div>
             </div>
-
+            <hr>
             <h2>キーワード</h2>
             <div id="words">
                 <span>棚</span>
