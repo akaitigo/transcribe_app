@@ -21,6 +21,6 @@ Route::resource('upload',UploadController::class);
 Route::get('/google', 'App\Http\Controllers\GoogleController@index');
 
 Route::get('/login', function () {return view('login');});
-Route::get('/result', function () {return view('result');});
+Route::get('/result/{id}','ResultController@viewResult');
 Route::get('/upload', function () {return view('upload');});
 

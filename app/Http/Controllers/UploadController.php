@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\getTranscribeResult;
 use App\Models\File;
 use App\Models\Result;
 use Facade\FlareClient\Flare;
@@ -98,13 +99,13 @@ class UploadController extends Controller
 
         $bucket = $storage->bucket($bucket_name);
 
-
         $bucket->upload(
         fopen("{$path}", 'r'),
         // $options
         );
-
-        echo "[{$path}]のアップロード完了";
+        getTranscribeResult::dispatch($id);
+        return view('index');
+        // echo "[{$path}]のアップロード完了";
 
 
 
