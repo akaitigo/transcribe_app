@@ -107,8 +107,6 @@ class UploadController extends Controller
         return view('index');
         // echo "[{$path}]のアップロード完了";
 
-
-
     }
 
 

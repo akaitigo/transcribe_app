@@ -16,4 +16,7 @@ class Result extends Model
     public function file(){
         return $this->belongsto('App\File');
     }
+    public static function storeContent($id,$content){
+        Result::where('file_id',$id)->update(['content' => $content]);
+    }
 }
