@@ -14,3 +14,4 @@ yarn-error.log
 /.idea
 /.vscode
 /config/google.json
+config/laravel-ffmpeg.php
