@@ -17,47 +17,7 @@ class UploadController extends Controller
     public function index(){
         return view('uploadTest');
     }
-    // public function store(Request $request){
-    //     //file('file')ファイルの情報のみ確認できる
-    //     // dd($request->file('file')->path());
-    //     //ファイルの検証
-    //     $request->validate([
-    //         'file' => 'required'
-    //     ]);
 
-    //     // $request->file('file')->store('files');
-
-    //     echo "upload success";
-
-    //     // // プロジェクトIDを入力
-    //     $projectId = 'stellar-river-339009';
-    //     // 認証鍵までのディレクトリを入力
-    //     $auth_key = config_path('google.json');
-    //     // バケットの名前を入力
-    //     $bucket_name = 'firstrecg';
-    //     // ファイルのディレクトリパスを入力
-    //     $path = $request->file('file')->path();
-
-
-    //     $storage = new StorageClient([
-    //     'projectId' => $projectId,
-    //     'keyFile' => json_decode(file_get_contents($auth_key, TRUE), true)
-    //     ]);
-
-    //     $bucket = $storage->bucket($bucket_name);
-
-
-    //     $bucket->upload(
-    //     fopen("{$path}", 'r'),
-    //     // $options
-    //     );
-
-    //     echo "[{$path}]のアップロード完了";
-
-
-
-    // }
-    //中山がいじったの↓
     public function store(Request $request){
         //file('file')ファイルの情報のみ確認できる
         // dd($request->file('file'));
@@ -75,11 +35,8 @@ class UploadController extends Controller
         ]);
         $id = File::where('name',$newname)->latest('created_at')->first()->id;
         Result::create(['file_id' => $id]);
-        dd(Result::all());
         $newname = '['.$id.']'.$newname.'.flac';
-        // dd(FFMpeg::fromDisk('videos')->open($filename),$file);
         FFMpeg::fromDisk('videos')->open($filename)->export()->toDisk('flac')->inFormat(new \FFMpeg\Format\Audio\Flac)->save($newname);
-        // dd(Storage::disk('flac')->get($newname));
         $file =Storage::disk('flac')->get($newname);
         // // プロジェクトIDを入力
         $projectId = 'stellar-river-339009';
@@ -88,8 +45,7 @@ class UploadController extends Controller
         // バケットの名前を入力
         $bucket_name = 'firstrecg';
         // ファイルのディレクトリパスを入力
-        // $path = $request->file('file')->path();
-        $path = $file;
+        $path =storage_path('flac/'.$newname);
 
         $storage = new StorageClient([
         'projectId' => $projectId,
@@ -99,12 +55,9 @@ class UploadController extends Controller
         $bucket = $storage->bucket($bucket_name);
 
 
-        $bucket->upload(
-        fopen("{$path}", 'r'),
-        // $options
-        );
+        $bucket->upload(fopen("{$path}", 'r'));
 
-        echo "[{$path}]のアップロード完了";
+        echo "アップロード完了";
 
 
 
