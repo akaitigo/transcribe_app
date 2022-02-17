@@ -58,6 +58,7 @@
         <div id="main" class="container">
             <div id="items">
                 @foreach ($results as $result)
+                @if ($result->status==1)
                 <a href="{{route('result.show',$result->id)}}">
                     <div class="item">
                         <div class="item-img" style="background-image: url({{asset('storage/images/'.$item->file_path)}});">
@@ -66,6 +67,16 @@
                         <span class="date">{{$result->date}}</span>
                     </div>
                 </a>
+                @else
+                <a href="{{route('result.show',$result->id)}}">
+                    <div class="item">
+                        <div class="item-img" style="background-image: url({{asset('storage/images/'.$item->file_path)}});">
+                            <span class="words">準備中, 準備中, 準備中</span>
+                        </div>
+                        <span class="date">{{$result->date}}</span>
+                    </div>
+                </a>
+                @endif
                 @endforeach
             </div>
         </div>
