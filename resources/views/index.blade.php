@@ -57,24 +57,16 @@
     <div id="field">
         <div id="main" class="container">
             <div id="items">
-                <a href="result">
+                @foreach ($results as $result)
+                <a href="{{route('result.show',$result->id)}}">
                     <div class="item">
-                        <div class="item-img" style="background-image: url(imgs/test0.jpg);">
-                            <span class="words">柵, 木材, ねじ止め</span>
+                        <div class="item-img" style="background-image: url({{asset('storage/images/'.$item->file_path)}});">
+                            <span class="words">{{$result->word[0]}}, {{$result->word[1]}}, {{$result->word[2]}}</span>
                         </div>
-                        <span class="date">2022/01/24 14:27</span>
+                        <span class="date">{{$result->date}}</span>
                     </div>
                 </a>
-
-                <a href="">
-                    <div class="item">
-                        <div class="item-img" style="background-image: url(imgs/test1.jfif);">
-                            <span class="words">かわいい, ちっちゃい, もふもふ</span>    
-                        </div>
-                        <span class="date">2022/01/27 10:07</span>
-                    </div>
-                </a>
-
+                @endforeach
             </div>
         </div>
     </div>
