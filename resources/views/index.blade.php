@@ -82,7 +82,7 @@
                 {{-- ここまで --}}
 
                 {{-- 野方が追加 --}}
-                <a href="">
+                <a href="result">
                     <div class="item">
                         <div class="item-img" style="background-image: url(imgs/test1.jfif);">
                             <span class="words">多い地域, 新町地域, 防災拠点</span>
@@ -90,7 +90,7 @@
                         <span class="date">2022/01/27 10:07</span>
                     </div>
                 </a>
-                <a href="">
+                <a href="result">
                     <div class="item">
                         <div class="item-img" style="background-image: url(imgs/test1.jfif);">
                             <span class="words">多い地域, 新町地域, 防災拠点</span>
@@ -98,7 +98,7 @@
                         <span class="date">2022/01/27 10:07</span>
                     </div>
                 </a>
-                <a href="">
+                <a href="result">
                     <div class="item">
                         <div class="item-img" style="background-image: url(imgs/test1.jfif);">
                             <span class="words">多い地域, 新町地域, 防災拠点</span>

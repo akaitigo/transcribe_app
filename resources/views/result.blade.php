@@ -44,7 +44,7 @@
 <body>
     @include('head')
     <div id="field">
-        @if ($result->status==1)
+        {{-- @if ($result->status==1)
         <div id="main" class="container">
             <div class="row">
                 <div class="col-5">
@@ -86,7 +86,27 @@
                 <span>生成中</span>
             </div>
         </div>
-        @endif
+        @endif --}}
+        <div id="main" class="container">
+            <div class="row">
+                <div class="col-5">
+                    <video src="videos/test.mp4" controls></video>
+                    <span>2022/01/24 14:27</span>
+                </div>
+                <div class="col-7">
+                    <h1>文字起こし結果</h1>
+                    <div id="results">
+                        起こした内容
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h2>キーワード</h2>
+            <div id="words">
+                <span>棚</span>
+                <span>木材</span>
+            </div>
+        </div>
     </div>
     <!-- #region Bootstrap -->
     <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
