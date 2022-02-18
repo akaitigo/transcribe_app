@@ -57,7 +57,8 @@
     <div id="field">
         <div id="main" class="container">
             <div id="items">
-                @foreach ($results as $result)
+                {{-- ここから野方がコメントアウト --}}
+                {{-- @foreach ($results as $result)
                 @if ($result->status==1)
                 <a href="{{route('result.show',$result->id)}}">
                     <div class="item">
@@ -77,7 +78,35 @@
                     </div>
                 </a>
                 @endif
-                @endforeach
+                @endforeach --}}
+                {{-- ここまで --}}
+
+                {{-- 野方が追加 --}}
+                <a href="">
+                    <div class="item">
+                        <div class="item-img" style="background-image: url(imgs/test1.jfif);">
+                            <span class="words">多い地域, 新町地域, 防災拠点</span>
+                        </div>
+                        <span class="date">2022/01/27 10:07</span>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="item">
+                        <div class="item-img" style="background-image: url(imgs/test1.jfif);">
+                            <span class="words">多い地域, 新町地域, 防災拠点</span>
+                        </div>
+                        <span class="date">2022/01/27 10:07</span>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="item">
+                        <div class="item-img" style="background-image: url(imgs/test1.jfif);">
+                            <span class="words">多い地域, 新町地域, 防災拠点</span>
+                        </div>
+                        <span class="date">2022/01/27 10:07</span>
+                    </div>
+                </a>
+                {{-- ここまで --}}
             </div>
         </div>
     </div>
