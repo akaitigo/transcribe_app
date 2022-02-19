@@ -40,8 +40,8 @@ class getTranscribeResult implements ShouldQueue
             $promise = $client->sendAsync($request)->then(function ($response) {
                 $result = $response->getBody();
                 $s = mb_convert_encoding($result, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');//json形式にエンコード
-                $s = json_decode($s,true); //連想配列で読みこむ。jsonのままでいい場合はこの行を削除すればよい。
-                $content;//これに文字起こし結果の文字列を入れる
+                // $s = json_decode($s,true); //連想配列で読みこむ。jsonのままでいい場合はこの行を削除すればよい。
+                $content = $s;//これに文字起こし結果の文字列を入れる
                 Result::storeContent($this->id,$content); // この行をテーブルに保存する処理に書き換える(resultのcontentに格納するメソッド)
             });
             $promise->wait();

@@ -17,7 +17,7 @@ class CreateResultsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('file_id')->comment('文字起こし元のファイルid');
             $table->foreign('file_id')->references('id')->on('files');
-            $table->longText('content')->nullable()->comment('文字起こし内容');
+            $table->json('content')->nullable()->comment('文字起こし内容のjson');
         });
     }
 
