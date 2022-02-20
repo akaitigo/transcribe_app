@@ -13,14 +13,11 @@ use App\Http\Controllers\UploadController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
+Route::get('/','App\Http\Controllers\IndexController@index');
 Route::resource('upload',UploadController::class);
 Route::get('/google', 'App\Http\Controllers\GoogleController@index');
-
+Route::get('/index','App\Http\Controllers\IndexController@index')->name('index');
 Route::get('/login', function () {return view('login');});
-Route::get('/result/{id}','ResultController@viewResult')->name('result.show');
+Route::get('/result/{id}','App\Http\Controllers\ResultController@viewResult')->name('result.show');
 Route::get('/upload', function () {return view('upload');});
 
