@@ -13,8 +13,11 @@ class File extends Model
         'name',
         'path',
     ];
-    public function Result(){
-        return $this->hasOne('App\Result');
+    public function result(){
+        return $this->hasOne(Result::class);
+    }
+    public static function getAllOrderByCreated_at(){
+        return self::thisorderBy('created_at','desc')->get();
     }
     // protected $guarded = [
     //     'id',
