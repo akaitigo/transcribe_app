@@ -43,7 +43,8 @@ return [
         ],
         'videos' => [
             'driver' => 'local',
-            'root' => storage_path('app/pulic/videos'),
+            'root' => storage_path('app/videos'),
+            'visibility' => 'public',
         ],
         'flac' => [
             'driver' => 'local',

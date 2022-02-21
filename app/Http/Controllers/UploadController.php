@@ -36,12 +36,12 @@ class UploadController extends Controller
         ]);
         $id = File::where('name',$newname)->latest('created_at')->first()->id;
         Result::create(['file_id' => $id]);
-        $format = new \FFMpeg\Format\Audio\Flac();
-        $format->setAudioChannels(1)->setAudioKiloBitrate(44.1);
+        // $format = new \FFMpeg\Format\Audio\Flac();
+        // $format->setAudioChannels(1)->setAudioKiloBitrate(283);
         $flacname = '['.$id.']'.$newname.'.flac';
-        FFMpeg::create()->fromDisk('videos')->open($filename)->export()->toDisk('flac')->save( $format, $flacname);
+        FFMpeg::fromDisk('videos')->open($filename)->export()->inFormat((new \FFMpeg\Format\Audio\Flac)->setAudioChannels(1)->setAudioKiloBitrate(283))->toDisk('flac')->save($flacname);
         FFMpeg::fromDisk('videos')->open($filename)->getFrameFromSeconds(1)->export()->toDisk('image')->save($newname.'.jpg');
-        $file =Storage::disk('flac')->get($newname);
+        $file =Storage::disk('flac')->get($flacname);
         // // プロジェクトIDを入力
         $projectId = 'stellar-river-339009';
         // 認証鍵までのディレクトリを入力
@@ -49,8 +49,8 @@ class UploadController extends Controller
         // バケットの名前を入力
         $bucket_name = 'firstrecg';
         // ファイルのディレクトリパスを入力
-        $path =storage_path('flac/'.$newname);
-
+        $path =storage_path('flac/'.$flacname);
+        //C:\xampp\htdocs\transcribe_app\storage\app\flac\[18]sample-5s.flac
         $storage = new StorageClient([
         'projectId' => $projectId,
         'keyFile' => json_decode(file_get_contents($auth_key, TRUE), true)
@@ -58,7 +58,7 @@ class UploadController extends Controller
 
         $bucket = $storage->bucket($bucket_name);
         $bucket->upload(
-        fopen("{$path}", 'r'),
+            fopen("{$path}", 'r'),
         // $options
         );
         getTranscribeResult::dispatch($id);
