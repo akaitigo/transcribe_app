@@ -17,7 +17,7 @@ class File extends Model
         return $this->hasOne(Result::class);
     }
     public static function getAllOrderByCreated_at(){
-        return self::orderBy('created_at','desc')->get();
+        return self::orderBy('created_at','asc')->get();
     }
     // protected $guarded = [
     //     'id',

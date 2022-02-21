@@ -43,15 +43,15 @@ return [
         ],
         'videos' => [
             'driver' => 'local',
-            'root' => storage_path('app/videos'),
+            'root' => storage_path('app/pulic/videos'),
         ],
         'flac' => [
             'driver' => 'local',
-            'root' => storage_path('flac'),
+            'root' => storage_path('app/flac'),
         ],
         'image' => [
             'driver' => 'local',
-            'root' => storage_path('image'),
+            'root' => storage_path('app/public/image'),
         ],
         's3' => [
             'driver' => 's3',

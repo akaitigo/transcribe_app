@@ -61,7 +61,7 @@
                 @if ($result->status==1)
                 <a href="{{route('result.show',$result->id)}}">
                     <div class="item">
-                        <div class="item-img" style="background-image: url({{asset('storage/images/'.$item->file_path)}});">
+                        <div class="item-img" style="background-image: url('{{asset('/storage/image/'.$result->path.'.jpg')}}')">
                             <span class="words">{{$result->word[0]}}, {{$result->word[1]}}, {{$result->word[2]}}</span>
                         </div>
                         <span class="date">{{$result->date}}</span>
@@ -70,7 +70,9 @@
                 @else
                 <a href="{{route('result.show',$result->id)}}">
                     <div class="item">
-                        <div class="item-img" style="background-image: url({{asset('storage/images/'.$item->file_path)}});">
+                        <div class="item-img" style="background-image: url('{{ Storage::url('image/'.$result->path.'.jpg') }}')">
+                            {{-- C:\xampp\htdocs\transcribe_app\storage\image\sample-5s.jpg --}}
+                        {{-- <div class="item-img" style="background-image: url('{{Storage::url('image/'.$result->path.'.jpg')}}')"> --}}
                             <span class="words">準備中, 準備中, 準備中</span>
                         </div>
                         <span class="date">{{$result->date}}</span>
