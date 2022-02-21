@@ -28,7 +28,7 @@ class UploadController extends Controller
         ]);
         $file = $request->file('file');
         $filename = $request->file('file')->getClientOriginalName();
-        $request->file('file')->storeAs('videos',$filename);
+        $request->file('file')->storeAs('public/videos',$filename);
         $newname = str_replace('.mp4','',$filename);
         File::create([
             'name' => $newname,
@@ -49,7 +49,7 @@ class UploadController extends Controller
         // バケットの名前を入力
         $bucket_name = 'firstrecg';
         // ファイルのディレクトリパスを入力
-        $path =storage_path('flac/'.$flacname);
+        $path =storage_path('app\\public\\flac\\'.$flacname);
         //C:\xampp\htdocs\transcribe_app\storage\app\flac\[18]sample-5s.flac
         $storage = new StorageClient([
         'projectId' => $projectId,
@@ -58,7 +58,7 @@ class UploadController extends Controller
 
         $bucket = $storage->bucket($bucket_name);
         $bucket->upload(
-            fopen("{$path}", 'r'),
+            fopen($path, 'r'),
         // $options
         );
         getTranscribeResult::dispatch($id);

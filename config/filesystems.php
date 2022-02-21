@@ -43,12 +43,11 @@ return [
         ],
         'videos' => [
             'driver' => 'local',
-            'root' => storage_path('app/videos'),
-            'visibility' => 'public',
+            'root' => storage_path('app/public/videos'),
         ],
         'flac' => [
             'driver' => 'local',
-            'root' => storage_path('app/flac'),
+            'root' => storage_path('app/public/flac'),
         ],
         'image' => [
             'driver' => 'local',
