@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Word extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'word',
+    ];
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
 }

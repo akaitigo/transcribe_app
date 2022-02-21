@@ -57,25 +57,26 @@
     <div id="field">
         <div id="main" class="container">
             <div id="items">
-                @foreach ($results as $result)
-                @if ($result->status==1)
-                <a href="{{route('result.show',$result->id)}}">
+                @foreach ($files as $file)
+                @if ($file->result->content!=null)
+                <a href="{{route('result.show',$file->id)}}">
                     <div class="item">
-                        <div class="item-img" style="background-image: url('{{ Storage::url('image/'.$result->path.'.jpg') }}')">
-                            <span class="words">{{$result->word[0]}}, {{$result->word[1]}}, {{$result->word[2]}}</span>
+                        <div class="item-img" style="background-image: url('{{ Storage::url('image/'.$file->path.'.jpg') }}')">
+                            {{-- wordsは後から考える --}}
+                            <span class="words">{{$file->result->words}}, {{$result->word[1]}}, {{$result->word[2]}}</span>
                         </div>
-                        <span class="date">{{$result->created_at}}</span>
+                        <span class="date">{{$file->created_at}}</span>
                     </div>
                 </a>
                 @else
-                <a href="{{route('result.show',$result->id)}}">
+                <a href="{{route('result.show',$file->id)}}">
                     <div class="item">
-                        <div class="item-img" style="background-image: url('{{ Storage::url('image/'.$result->path.'.jpg') }}')">
+                        <div class="item-img" style="background-image: url('{{ Storage::url('image/'.$file->path.'.jpg') }}')">
                             {{-- C:\xampp\htdocs\transcribe_app\storage\image\sample-5s.jpg --}}
                         {{-- <div class="item-img" style="background-image: url('{{Storage::url('image/'.$result->path.'.jpg')}}')"> --}}
                             <span class="words">準備中, 準備中, 準備中</span>
                         </div>
-                        <span class="date">{{$result->created_at}}</span>
+                        <span class="date">{{$file->created_at}}</span>
                     </div>
                 </a>
                 @endif

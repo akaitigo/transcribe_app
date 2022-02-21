@@ -15,9 +15,9 @@ class IndexController extends Controller
     public function index()
     {
         $File = new File();
-        $results = $File->getAllOrderByCreated_at();
+        $files = $File->getAllOrderByCreated_at();
         // dd($results);
-        return view('index',['results' => $results]);
+        return view('index',['files' => $files]);
     }
 
     /**
