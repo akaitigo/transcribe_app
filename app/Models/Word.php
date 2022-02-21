@@ -13,6 +13,13 @@ class Word extends Model
     ];
     public function results()
     {
-        return $this->hasMany(Result::class);
+        return $this->belongsToMany(Result::class);
     }
+    public static function existsWord($word){
+        return self::where('word',$word)->doesntExists();
+    }
+    public static function wordId($word){
+        return self::select('id')->where('word',$word)->first();
+    }
+
 }
