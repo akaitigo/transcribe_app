@@ -84,9 +84,11 @@
             </div>
         </div>
     </div>
-
     <!-- #region Bootstrap -->
     <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- #endregion -->
+    <div class="d-flex justify-content-center">
+    {{$files->links()}}
+    </div>
 </body>
 </html>

@@ -16,6 +16,7 @@ class IndexController extends Controller
     {
         $File = new File();
         $files = $File->getAllOrderByCreated_at();
+        $files->withPath('/index');
         // dd($results);
         return view('index',['files' => $files]);
     }
