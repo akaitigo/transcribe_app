@@ -44,17 +44,17 @@
 <body>
     @include('head')
     <div id="field">
-        @if ($result->status==1)
+        @if ($file->result->content!=null)
         <div id="main" class="container">
             <div class="row">
                 <div class="col-5">
-                    <video src="{{asset('videos/'.$result->path)}}" controls></video>
-                    <span>{{$result->date}}</span>
+                    <video src="{{asset('videos/'.$file->path.'mp4')}}" controls></video>
+                    <span>{{$file->created_at}}</span>
                 </div>
                 <div class="col-7">
                     <h1>文字起こし結果</h1>
                     <div id="results">
-                        {{$result->content}}
+                        {{$file->result->content}}
                     </div>
                 </div>
             </div>
@@ -70,8 +70,8 @@
         <div id="main" class="container">
             <div class="row">
                 <div class="col-5">
-                    <video src="{{asset('videos/'.$result->path)}}" controls></video>
-                    <span>{{$result->date}}</span>
+                    <video src="{{asset('videos/'.$file->path.'mp4')}}" controls></video>
+                    <span>{{$file->date}}</span>
                 </div>
                 <div class="col-7">
                     <h1>文字起こし結果</h1>
