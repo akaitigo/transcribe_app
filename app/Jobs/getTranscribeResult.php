@@ -34,17 +34,31 @@ class getTranscribeResult implements ShouldQueue
      */
     public function handle()
     {
+        global $k;
         //文字起こし結果を取得するコードを書く
-        $client = new Client(['headers' => ['id' => $this->id]]);
+        // $k =strval($this->id);
+        $k =$this->id;
+        // $k= 1;
+
+        $client = new Client(['headers' => ['id' => $k]]);
+        // $client = new Client(['headers' => ['id' => 2]]);
             $request = new \GuzzleHttp\Psr7\Request('GET', 'https://asia-northeast2-stellar-river-339009.cloudfunctions.net/function-5');
+
             $promise = $client->sendAsync($request)->then(function ($response) {
+                global $k;
                 $result = $response->getBody();
                 $s = mb_convert_encoding($result, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');//json形式にエンコード
                 // $s = json_decode($s,true); //連想配列で読みこむ。jsonのままでいい場合はこの行を削除すればよい。
-                $content = $s;//これに文字起こし結果の文字列を入れる
-                Result::storeContent($this->id,$content); // この行をテーブルに保存する処理に書き換える(resultのcontentに格納するメソッド)
+                if($s=='[]'){
+                    getTranscribeResult::dispatch($this->id)->delay(now()->addMinutes(1));
+                }else{
+                    $content = $s;//これに文字起こし結果の文字列を入れる
+                    Result::storeContent($this->id,$content);
+                // Result::storeContent($this->id,$k);// この行をテーブルに保存する処理に書き換える(resultのcontentに格納するメソッド)
+                }
+                
             });
             $promise->wait();
-            getKeyWord::dispatch($this->id)->delay(now()->addMinutes(4));
+            getKeyWord::dispatch($this->id)->delay(now()->addMinutes(1));
     }
 }

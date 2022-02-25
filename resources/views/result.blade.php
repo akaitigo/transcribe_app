@@ -74,9 +74,9 @@
             <hr>
             <h2>キーワード</h2>
             <div id="words">
-                {{-- @foreach ($result->words as $word)
-                <span>{{$word}}</span>
-                @endforeach --}}
+                @foreach ($file->result->words as $word)
+                <span>{{$word->name}}</span>
+                @endforeach
             </div>
         </div>
         @else

@@ -17,7 +17,7 @@ class GoogleController extends Controller
             $promise = $client->sendAsync($request)->then(function ($response) {
                 $result = $response->getBody();
                 $s = mb_convert_encoding($result, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');//json形式にエンコード
-                $s = json_decode($s,true); //連想配列で読みこむ。jsonのままでいい場合はこの行を削除すればよい。
+                // $s = json_decode($s,true); //連想配列で読みこむ。jsonのままでいい場合はこの行を削除すればよい。
                 print_r($s); // この行をテーブルに保存する処理に書き換える
             });
             $promise->wait();
@@ -38,9 +38,9 @@ class GoogleController extends Controller
         }
 
         //関数の実行
-        $id = 100; //現在id=100のファイルのみバケットにいれている。
-        // getScript($id);
-        getKeyfrase($id);
+        $id = 2; //現在id=100のファイルのみバケットにいれている。
+        getScript($id);
+        // getKeyfrase($id);
         
     }
 

@@ -19,7 +19,7 @@ class Word extends Model
         return self::where('name',$word)->exists();
     }
     public static function wordId($word){
-        return self::select('id')->where('word',$word)->first();
+        return self::select('id')->where('name',$word)->first();
     }
 
 }
