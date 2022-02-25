@@ -48,7 +48,7 @@
         <div id="main" class="container">
             <div class="row">
                 <div class="col-5">
-                    <video src="{{asset('videos/'.$file->path.'mp4')}}" controls></video>
+                    <video src="/storage/videos/{{ $file->path.'.mp4' }}" controls></video>
                     <span>{{$file->created_at}}</span>
                 </div>
                 <div class="col-7">
@@ -70,7 +70,7 @@
         <div id="main" class="container">
             <div class="row">
                 <div class="col-5">
-                    <video src="{{asset('videos/'.$file->path.'mp4')}}" controls></video>
+                    <video src="/storage/videos/{{ $file->path.'.mp4' }}" controls></video>
                     <span>{{$file->date}}</span>
                 </div>
                 <div class="col-7">
