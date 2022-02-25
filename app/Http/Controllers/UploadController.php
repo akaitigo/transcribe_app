@@ -39,8 +39,8 @@ class UploadController extends Controller
         // $format = new \FFMpeg\Format\Audio\Flac();
         // $format->setAudioChannels(1)->setAudioKiloBitrate(283);
         $flacname = '['.$id.']'.$newname.'.flac';
-        FFMpeg::fromDisk('videos')->open($filename)->export()->inFormat((new \FFMpeg\Format\Audio\Flac)->setAudioChannels(1)->setAudioKiloBitrate(44.1))->toDisk('flac')->save($flacname);
-        FFMpeg::fromDisk('videos')->open($filename)->getFrameFromSeconds(10)->export()->toDisk('image')->save($newname.'.jpg');
+        FFMpeg::fromDisk('videos')->open($filename)->export()->inFormat((new \FFMpeg\Format\Audio\Flac)->setAudioChannels(1)->setAudioKiloBitrate(500))->toDisk('flac')->save($flacname);
+        FFMpeg::fromDisk('videos')->open($filename)->getFrameFromSeconds(1)->export()->toDisk('image')->save($newname.'.jpg');
         $file =Storage::disk('flac')->get($flacname);
         // // プロジェクトIDを入力
         $projectId = 'stellar-river-339009';

@@ -43,17 +43,18 @@ class getKeyWord implements ShouldQueue
                 if($words==''){
                     getKeyWord::dispatch($this->id)->delay(now()->addMinutes(4));
                 }else{
-                    foreach($words as $word){
+                    foreach($words[0] as $word){
                         if(!Word::existsWord($word)){
-                            Word::create(['name'=>$word,]);
-                        }else{
-                            $model = new Word();
-                            $file = File::find($this->id);
-                            $resultId = $file->result->id;
-                            $wordId = Word::wordID($word);
-                            $count = $word;
-                            $model->results()->attach([$resultId => ['word_id'=>$wordId,'count'=>$count]]);
+                            preg_match("/'(.*?)'/", $word, $matches);
+                            Word::create(['name'=>$matches[1],]);
                         }
+                        $model = new Word();
+                        $file = File::find($this->id);
+                        $resultId = $file->result->id;
+                        $wordId = Word::wordID($word);
+                        $count = 1;
+                        $model->results()->attach([$resultId => ['word_id'=>$wordId,'count'=>$count]]);
+                        
                     }
                }
             });

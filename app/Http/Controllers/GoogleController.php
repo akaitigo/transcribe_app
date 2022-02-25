@@ -30,14 +30,16 @@ class GoogleController extends Controller
                 $result = $response->getBody();
                 $s = mb_convert_encoding($result, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');//json形式にエンコード                
                 $s = json_decode($s,true); //連想配列で読みこむ。jsonのままでいい場合はこの行を削除すればよい。
-                print_r($s); //この行をテーブルに保存する処理に書き換える
+                $word = $s[0][1];//この行をテーブルに保存する処理に書き換える
+                preg_match("/'(.*?)'/", $word, $matches);
+                print_r($matches[1]);
             });
             $promise->wait();
         }
 
         //関数の実行
         $id = 100; //現在id=100のファイルのみバケットにいれている。
-        getScript($id);
+        // getScript($id);
         getKeyfrase($id);
         
     }
