@@ -45,6 +45,6 @@ class getTranscribeResult implements ShouldQueue
                 Result::storeContent($this->id,$content); // この行をテーブルに保存する処理に書き換える(resultのcontentに格納するメソッド)
             });
             $promise->wait();
-            getKeyWord::dispatch($this->id);
+            getKeyWord::dispatch($this->id)->delay(now()->addMinutes(4));
     }
 }

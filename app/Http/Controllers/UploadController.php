@@ -61,7 +61,7 @@ class UploadController extends Controller
             fopen($path, 'r'),
         // $options
         );
-        getTranscribeResult::dispatch($id);
+        getTranscribeResult::dispatch($id)->delay(now()->addMinutes(4));
         return redirect()->route('index');
         // echo "[{$path}]のアップロード完了";
 
