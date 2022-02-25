@@ -54,7 +54,20 @@
                 <div class="col-7">
                     <h1>文字起こし結果</h1>
                     <div id="results">
-                        {{$file->result->content}}
+                        {{-- {{$file->result->content}} --}}
+                        @php
+                        $s = $file->result->content;
+                        $s = mb_convert_encoding($s, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
+                        $s = json_decode($s,true);
+                        // dd($s);
+                        foreach ($s as $value) {
+                            if (isset($value['script'])){
+                                echo($value['startTime']);
+                                echo($value['script']);
+                                echo "<br/>";
+                            }               
+                        }                       
+                        @endphp
                     </div>
                 </div>
             </div>
