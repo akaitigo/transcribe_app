@@ -3,12 +3,12 @@
 return [
     'default_disk' => 'local',
     'ffmpeg' => [
-        'binaries' => env('FFMPEG_BINARIES', 'C:\ffmpeg\bin\ffmpeg.exe'),
+        'binaries' => env('FFMPEG_BINARIES', '/Users/nogata/wp/ffmpeg'),
         'threads'  => 12,
     ],
 
     'ffprobe' => [
-        'binaries' => env('FFPROBE_BINARIES', 'C:\ffmpeg\bin\ffprobe.exe'),
+        'binaries' => env('FFPROBE_BINARIES', '/Users/nogata/wp/ffprobe'),
     ],
 
     'timeout' => 3600,
