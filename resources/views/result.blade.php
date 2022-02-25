@@ -62,7 +62,9 @@
                         // dd($s);
                         foreach ($s as $value) {
                             if (isset($value['script'])){
-                                echo($value['startTime']);
+                                $time = str_replace('s', '', $value['startTime']);
+                                $time = (int)$time;
+                                print_r($time);
                                 echo($value['script']);
                                 echo "<br/>";
                             }               
