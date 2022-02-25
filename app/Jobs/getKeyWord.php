@@ -41,7 +41,7 @@ class getKeyWord implements ShouldQueue
                 $result = $response->getBody();
                 $s = mb_convert_encoding($result, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');//json形式にエンコード
                 $words = json_decode($s,true); //連想配列で読みこむ。jsonのままでいい場合はこの行を削除すればよい。
-                if($words==''){
+                if(is_null($words)){
                     getKeyWord::dispatch($this->id)->delay(now()->addMinutes(1));
                 }else{
                     foreach($words[0] as $word){
