@@ -40,19 +40,22 @@ class getKeyWord implements ShouldQueue
                 $result = $response->getBody();
                 $s = mb_convert_encoding($result, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');//json形式にエンコード
                 $words = json_decode($s,true); //連想配列で読みこむ。jsonのままでいい場合はこの行を削除すればよい。
-                foreach($words as $word){
-                    if(Word::existsWord($word)){
-                        Word::store(['word'=>$word,])->save();
-                    }else{
-                        $model = new Word();
-                        $file = File::find($this->id);
-                        $resultId = $file->result->id;
-                        $wordId = Word::wordID($word);
-                        $count = $word;
-                        $model->results()->attach([$resultId => ['word_id'=>$wordId,'count'=>$count]]);
+                if($words==''){
+                    getKeyWord::dispatch($this->id)->delay(now()->addMinutes(4));
+                }else{
+                    foreach($words as $word){
+                        if(Word::existsWord($word)){
+                            Word::store(['word'=>$word,])->save();
+                        }else{
+                            $model = new Word();
+                            $file = File::find($this->id);
+                            $resultId = $file->result->id;
+                            $wordId = Word::wordID($word);
+                            $count = $word;
+                            $model->results()->attach([$resultId => ['word_id'=>$wordId,'count'=>$count]]);
+                        }
                     }
-
-                }
+               }
             });
             $promise->wait();
     }
