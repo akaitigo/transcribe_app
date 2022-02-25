@@ -16,7 +16,7 @@ class Word extends Model
         return $this->belongsToMany(Result::class);
     }
     public static function existsWord($word){
-        return self::where('word',$word)->exists();
+        return self::where('name',$word)->exists();
     }
     public static function wordId($word){
         return self::select('id')->where('word',$word)->first();
