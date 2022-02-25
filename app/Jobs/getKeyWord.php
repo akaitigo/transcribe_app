@@ -44,7 +44,7 @@ class getKeyWord implements ShouldQueue
                     getKeyWord::dispatch($this->id)->delay(now()->addMinutes(4));
                 }else{
                     foreach($words as $word){
-                        if(Word::existsWord($word)){
+                        if(!Word::existsWord($word)){
                             Word::store(['word'=>$word,])->save();
                         }else{
                             $model = new Word();
