@@ -9,7 +9,7 @@ class Word extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'word',
+        'name',
     ];
     public function results()
     {

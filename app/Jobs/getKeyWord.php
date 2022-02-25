@@ -45,7 +45,7 @@ class getKeyWord implements ShouldQueue
                 }else{
                     foreach($words as $word){
                         if(!Word::existsWord($word)){
-                            Word::store(['word'=>$word,])->save();
+                            Word::create(['name'=>$word,]);
                         }else{
                             $model = new Word();
                             $file = File::find($this->id);
