@@ -64,7 +64,10 @@
                             if (isset($value['script'])){
                                 $time = str_replace('s', '', $value['startTime']);
                                 $time = (int)$time;
-                                print_r($time);
+                                $minutes = floor(($time / 60) % 60);
+                                $seconds = $seconds = $time % 60;
+                                $hms = sprintf("%02d:%02d", $minutes, $seconds);
+                                print_r($hms);
                                 echo($value['script']);
                                 echo "<br/>";
                             }               
