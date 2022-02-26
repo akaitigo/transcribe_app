@@ -49,8 +49,8 @@ class UploadController extends Controller
         // バケットの名前を入力
         $bucket_name = 'firstrecg';
         // ファイルのディレクトリパスを入力
-        // $path =storage_path('app\\public\\flac\\'.$flacname);
-        $path =storage_path('app/public/flac/'.$flacname);
+        $path =storage_path('app\\public\\flac\\'.$flacname);
+        //$path =storage_path('app/public/flac/'.$flacname);
         //C:\xampp\htdocs\transcribe_app\storage\app\flac\[18]sample-5s.flac
         $storage = new StorageClient([
         'projectId' => $projectId,

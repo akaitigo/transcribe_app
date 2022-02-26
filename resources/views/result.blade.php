@@ -12,11 +12,25 @@
             width: 100%;
         }
 
-        div#results, div#words {
-            display: inline-block;
-            text-align: left;
-            border: 1px solid black;
+        div#texts {
+            max-height: 420px;
+            overflow-y: scroll;
             background-color: white;
+            padding: 0;
+            font-size: smaller;
+        }
+
+            div#texts table {
+                text-align: left;
+                
+            }
+
+            div#texts table th {
+                text-align: center;
+            }
+
+        div#results, div#words {
+            text-align: left;
         }
 
         div#results {
@@ -29,13 +43,13 @@
         div#words {
             width: calc(100% - 20px);
             height: 100px;
-            overflow-y: scroll;
+            /*overflow-y: scroll;*/
             padding: 10px;
         }
 
             div#words span {
                 border-radius: 60%;
-                background-color: lightgray;
+                background-color: lightyellow;
                 padding: 5px 10px;
             }
     </style>
@@ -90,18 +104,54 @@
                 <div class="col-5">
                     <video src="/storage/videos/{{ $file->path.'.mp4' }}" controls></video>
                     <span>{{$file->date}}</span>
-                </div>
-                <div class="col-7">
-                    <h1>文字起こし結果</h1>
-                    <div id="results">
-                        生成中
+                    <div id="words">
+                        <span>準備中</span>
                     </div>
                 </div>
-            </div>
-            <hr>
-            <h2>キーワード</h2>
-            <div id="words">
-                <span>生成中</span>
+                <div id="texts" class="col-7">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Time</th>
+                            <th>Text</th>
+                        </thead>
+                        <tbody>
+                            <!-- #region forで囲ってください -->
+                            <tr>
+                                <td>00:00</td>
+                                <td>ねただいまから総務常任委員会を開会いたします この際 初版の報告を申し上げます 傍聴 は あらかじめ 許可してあります 以上で初版の報告を終わります</td>
+                            </tr>
+                            <tr>
+                                <td>00:30</td>
+                                <td>それでは 書簡事務の調査に入ります 本日は 執行部からの報告事項がありませんので 委員の方々から執行部に対し お聞きしたいことがありましたらお願いいたします</td>
+                            </tr>
+                            <tr>
+                                <td>00:30</td>
+                                <td>それでは 書簡事務の調査に入ります 本日は 執行部からの報告事項がありませんので 委員の方々から執行部に対し お聞きしたいことがありましたらお願いいたします</td>
+                            </tr>
+                            <tr>
+                                <td>00:30</td>
+                                <td>それでは 書簡事務の調査に入ります 本日は 執行部からの報告事項がありませんので 委員の方々から執行部に対し お聞きしたいことがありましたらお願いいたします</td>
+                            </tr>
+                            <tr>
+                                <td>00:30</td>
+                                <td>それでは 書簡事務の調査に入ります 本日は 執行部からの報告事項がありませんので 委員の方々から執行部に対し お聞きしたいことがありましたらお願いいたします</td>
+                            </tr>
+                            <tr>
+                                <td>00:30</td>
+                                <td>それでは 書簡事務の調査に入ります 本日は 執行部からの報告事項がありませんので 委員の方々から執行部に対し お聞きしたいことがありましたらお願いいたします</td>
+                            </tr>
+                            <tr>
+                                <td>00:30</td>
+                                <td>それでは 書簡事務の調査に入ります 本日は 執行部からの報告事項がありませんので 委員の方々から執行部に対し お聞きしたいことがありましたらお願いいたします</td>
+                            </tr>
+                            <tr>
+                                <td>00:30</td>
+                                <td>それでは 書簡事務の調査に入ります 本日は 執行部からの報告事項がありませんので 委員の方々から執行部に対し お聞きしたいことがありましたらお願いいたします</td>
+                            </tr>
+                            <!-- #endregion -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         @endif
