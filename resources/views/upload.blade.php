@@ -25,7 +25,7 @@
     @include('head')
     <div id="field">
         <div id="main" class="container">
-            <h1>動画ファイルをアップロード</h1>
+            <h1>Upload your video</h1>
             <form action="/upload" method="post"enctype="multipart/form-data">
                 @csrf
                 <input name="file" type="file" id="file" accept=".mp4" class="form-control"><br>
