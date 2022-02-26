@@ -13,7 +13,7 @@
         }
 
         div#texts {
-            max-height: 420px;
+            max-height: 430px;
             overflow-y: scroll;
             background-color: white;
             padding: 0;
@@ -64,39 +64,57 @@
                 <div class="col-5">
                     <video src="/storage/videos/{{ $file->path.'.mp4' }}" controls></video>
                     <span>{{$file->created_at}}</span>
-                </div>
-                <div class="col-7">
-                    <h1>文字起こし結果</h1>
-                    <div id="results">
-                        {{-- {{$file->result->content}} --}}
-                        @php
-                        $s = $file->result->content;
-                        $s = mb_convert_encoding($s, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
-                        $s = json_decode($s,true);
-                        // dd($s);
-                        foreach ($s as $value) {
-                            if (isset($value['script'])){
-                                $time = str_replace('s', '', $value['startTime']);
-                                $time = (int)$time;
-                                $minutes = floor(($time / 60) % 60);
-                                $seconds = $seconds = $time % 60;
-                                $hms = sprintf("%02d:%02d", $minutes, $seconds);
-                                print_r($hms);
-                                echo($value['script']);
-                                echo "<br/>";
-                            }               
-                        }                       
-                        @endphp
+                    <div id="words">
+                        @foreach ($file->result->words as $word)
+                        <span>{{$word->name}}</span>
+                        @endforeach
                     </div>
                 </div>
+                
+                <div id="texts" class="col-7">
+                    {{-- <h1>文字起こし結果</h1> --}}
+                    {{-- <div id="results"> --}}
+                        {{-- {{$file->result->content}} --}}
+                        
+                        <table class="table table-striped">
+                            <thead>
+                                <th>Time</th>
+                                <th>Text</th>
+                            </thead>
+                            <tbody>
+                                @php
+                                $s = $file->result->content;
+                                $s = mb_convert_encoding($s, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
+                                $s = json_decode($s,true);
+                                // dd($s);
+                                foreach ($s as $value) {
+                                    if (isset($value['script'])){
+                                        $time = str_replace('s', '', $value['startTime']);
+                                        $time = (int)$time;
+                                        $minutes = floor(($time / 60) % 60);
+                                        $seconds = $seconds = $time % 60;
+                                        $hms = sprintf("%02d:%02d", $minutes, $seconds);
+                                        echo '<tr>';
+                                        echo('<td>'.$hms.'</td>');
+                                        echo('<td>'.$value['script'].'</td>');
+                                        echo "</tr>";
+                                    }             
+                                }                       
+                                @endphp
+                            </tbody>
+                        </table>
+
+                    
+                    {{-- </div> --}}
+                </div>
             </div>
-            <hr>
+            {{-- <hr>
             <h2>キーワード</h2>
             <div id="words">
                 @foreach ($file->result->words as $word)
                 <span>{{$word->name}}</span>
                 @endforeach
-            </div>
+            </div> --}}
         </div>
         @else
         <div id="main" class="container">
