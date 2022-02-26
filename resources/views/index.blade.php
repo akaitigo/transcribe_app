@@ -63,7 +63,8 @@
                     <div class="item">
                         <div class="item-img" style="background-image: url('{{ Storage::url('image/'.$file->path.'.jpg') }}')">
                             {{-- wordsは後から考える --}}
-                            {{-- <span class="words">{{$file->result->words}}, {{$result->word[1]}}, {{$result->word[2]}}</span> --}}
+                            <span class="words">{{($file->result->words[0]->name)}},{{($file->result->words[1]->name)}},{{($file->result->words[2]->name)}}</span>
+                            {{-- , {{$result->word[1]}}, {{$result->word[2]}} --}}
                         </div>
                         <span class="date">{{$file->created_at}}</span>
                     </div>

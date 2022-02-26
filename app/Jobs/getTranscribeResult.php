@@ -55,10 +55,11 @@ class getTranscribeResult implements ShouldQueue
                     $content = $s;//これに文字起こし結果の文字列を入れる
                     Result::storeContent($this->id,$content);
                 // Result::storeContent($this->id,$k);// この行をテーブルに保存する処理に書き換える(resultのcontentに格納するメソッド)
+                    getKeyWord::dispatch($this->id);
                 }
                 
             });
             $promise->wait();
-            getKeyWord::dispatch($this->id)->delay(now()->addMinutes(1));
+            // getKeyWord::dispatch($this->id)->delay(now()->addMinutes(1));
     }
 }

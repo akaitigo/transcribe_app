@@ -34,8 +34,8 @@ class getKeyWord implements ShouldQueue
      */
     public function handle()
     {
-        // $client = new Client(['headers' => ['id' => $this->id]]);
-        $client = new Client(['headers' => ['id' => 1]]);
+        $client = new Client(['headers' => ['id' => $this->id]]);
+        // $client = new Client(['headers' => ['id' => 1]]);
             $request = new \GuzzleHttp\Psr7\Request('GET', 'https://asia-northeast2-stellar-river-339009.cloudfunctions.net/getKeyfrase');
             $promise = $client->sendAsync($request)->then(function ($response) {
                 $result = $response->getBody();
